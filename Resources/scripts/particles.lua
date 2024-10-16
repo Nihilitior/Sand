@@ -81,6 +81,46 @@ function update_water(x,y,sim)
     end
 end
 
+-- function spread_effect(x, y, sim, radius, target_type)
+--     local floor = math.floor
+--     for py = floor(-radius/sim.particleSize), floor(radius/sim.particleSize) + 1 do
+--         for px = floor(-radius/sim.particleSize), floor(radius/sim.particleSize) + 1 do
+--             if (px * px + py * py) < (radius * radius) / (sim.particleSize * sim.particleSize) then
+--                 sim:set_index(x + px, y + py, target_type)
+--             end
+--         end
+--     end
+-- end
+
+-- -- 每个粒子将有一个速度属性，用来跟踪水的流动速度
+-- function update_water(x, y, sim)
+--     local particle_speed = 2  -- 设置水流的速度，可以根据需求调整
+--     local dx = math.random(-1, 1) -- 随机选择横向流动方向
+--     local b = sim:get_index(x, y + particle_speed) -- 检查下方，增加水的流速
+--     local lr = sim:get_index(x + dx, y)
+--     local a = sim:get_index(x, y - particle_speed)
+    
+--     -- 如果下方是空气，水加速下落
+--     if b == 1 then
+--         sim:set_index(x, y, 1)  -- 当前位置变为空气
+--         sim:set_index(x, y + particle_speed, 4) -- 水下落到下方位置
+--     -- 如果没有下落，水横向扩散
+--     elseif lr == 1 then
+--         sim:set_index(x, y, 1)
+--         sim:set_index(x + dx, y, 4)
+--     -- 如果遇到熔岩或其他特定物质，触发扩散效果
+--     elseif b == 10 or lr == 10 or a == 10 then
+--         spread_effect(x, y, sim, 5, 8) -- 扩散效果，如蒸汽或其他反应
+--     end
+-- end
+
+
+
+
+
+
+
+
 function update_oil(x,y,sim)
     local dx=math.random(-1,1)
     local b=sim:get_index(x,y+1)

@@ -1,0 +1,12 @@
+name = "Game"
+default_targets = ["win64"]
+build_directory = "bin"
+love_files = [
+    "+*",
+    "-*/.*"
+]
+love_version = "11.5"
+
+[win64]
+love_binaries = "C:\\Program Files\\LOVE"
+

@@ -1,0 +1,32 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build LÖVE",
+            "type": "process",
+            "command": "makelove",
+            "args": [
+                "--config",
+                "make_all.toml"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+        {
+            "label": "Run LÖVE",
+            "type": "shell",
+            "command": "lovec",
+            "args": [
+                "."
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+        },
+    ]
+}

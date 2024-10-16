@@ -26,7 +26,7 @@ function Simulation.new(width,height,particleSize)
         for y=0,height-1 do
             sim.imageData:setPixel(x,y,1,.9,.9,1)
         end
-    end
+    end 
     sim.image=love.graphics.newImage(sim.imageData)
     sim.shader=love.graphics.newShader('Resources/shaders/shader.fs')
     return sim

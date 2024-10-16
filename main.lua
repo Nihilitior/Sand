@@ -11,7 +11,7 @@ local printThread
 --local timer=hump.timer
 --End of local variables
 
-currentType=2
+currentType=3
 debug=false
 paused=nil
 particleTypes=nil
@@ -35,6 +35,7 @@ function love.load()
             end
         end ]] ) 
     print("LETS FUCKING GOOOOO")
+    
     printThread:start()
     love.graphics.setDefaultFilter("nearest","nearest",0)
     sim=require'Resources.scripts.simulation'.new(width,height,particleSize)
@@ -43,7 +44,17 @@ function love.load()
     timer= require 'Resources.lib.hump.timer'
 
     UI=require'Resources.scripts.UI'.load()
+
+    -- 定义钻头属性
+    drill = {
+        x = 400,   -- 初始位置X
+        y = 300,   -- 初始位置Y
+        width = 20,   -- 钻头宽度
+        height = 40,  -- 钻头高度
+        speed = 200   -- 钻头移动速度（像素/秒）
+    }
 end
+
 
 function math.clamp(value,min,max)
     if(value>max)then
@@ -84,7 +95,9 @@ function love.draw()
         line(mx,my, love.mouse.getX(),love.mouse.getY())
     end
 
-    
+    -- 绘制钻头（一个简单的矩形表示）
+    love.graphics.setColor(1, 0, 0)  -- 红色
+    love.graphics.rectangle("fill", drill.x, drill.y, drill.width, drill.height)
 end
 
 
@@ -118,6 +131,21 @@ function love.update(dt)
         return
     end
     sim:update(dt)
+
+    -- 移动控制
+    if love.keyboard.isDown("up") then
+        drill.y = drill.y - drill.speed * dt
+    end
+    if love.keyboard.isDown("down") then
+        drill.y = drill.y + drill.speed * dt
+    end
+    if love.keyboard.isDown("left") then
+        drill.x = drill.x - drill.speed * dt
+    end
+    if love.keyboard.isDown("right") then
+        drill.x = drill.x + drill.speed * dt
+    end
+
 end
 
 function love.mousepressed(x,y,button)
